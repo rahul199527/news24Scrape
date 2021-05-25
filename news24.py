@@ -77,20 +77,22 @@ for match in a_elements:
 
 
 #print (len(matches))
-
+sample = {'title': None, 'article': None}
 for j in matches:
     try: 
         driver.get(j)
         titleElement = driver.find_element_by_tag_name('h1').text
         bodyElement = driver.find_element_by_class_name('article__body').get_attribute("textContent")
-        print(titleElement)
-        print('\n')
-        print(bodyElement)
+        sample.update({'title' : titleElement})
+        sample.update({'article' : bodyElement})
+        #print(titleElement)
+        #print('\n')
+        #print(bodyElement)
     except:
         print("Needs a Subscriber Account")
 
 
-
+print(sample)
 
 
 
