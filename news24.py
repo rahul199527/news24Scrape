@@ -27,8 +27,8 @@ inputElement = driver.find_element_by_id("search")
 inputElement.send_keys(company)
 inputElement.send_keys(Keys.ENTER)
 
-#driver.execute_script("window.scrollBy(0,20000)")
-#time.sleep(10)
+driver.execute_script("window.scrollBy(0,250)")
+time.sleep(10)
 
 a_elements = []
 matches = [] ## contains the filtered list of companies
