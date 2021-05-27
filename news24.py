@@ -10,7 +10,7 @@ import urllib
 import requests
 
 
-company = 'santam' ## has to taken from user input
+company = input("Enter company name :" )  ## has to taken from user input
 
 driver = webdriver.Chrome(executable_path=r'C:\\Python\\news24\\chromedriver.exe')
 driver.get('https://www.news24.com/')
@@ -35,19 +35,21 @@ inputElement = driver.find_element_by_id("search")
 inputElement.send_keys(company)
 inputElement.send_keys(Keys.ENTER)
 
+
+
 time.sleep(5)
 driver.execute_script("window.scrollBy(0,1000)")
 time.sleep(5)
-#driver.execute_script("window.scrollBy(0,1000)")
-#time.sleep(10)
-#driver.execute_script("window.scrollBy(0,1000)")
-#time.sleep(10)
-#driver.execute_script("window.scrollBy(0,1000)")
-#time.sleep(10)
-#driver.execute_script("window.scrollBy(0,1000)")
-#time.sleep(10)
-#driver.execute_script("window.scrollBy(0,1000)")
-#ime.sleep(10)
+driver.execute_script("window.scrollBy(0,1000)")
+time.sleep(10)
+driver.execute_script("window.scrollBy(0,1000)")
+time.sleep(10)
+driver.execute_script("window.scrollBy(0,1000)")
+time.sleep(10)
+driver.execute_script("window.scrollBy(0,1000)")
+time.sleep(10)
+driver.execute_script("window.scrollBy(0,1000)")
+ime.sleep(10)
 
 
 a_elements = []
@@ -67,49 +69,32 @@ for match in a_elements:
             if company in match:
                 matches.append(match)
 
-## This is title scarping part t_element is the list.
-#for i in matches:
-#    driver.get(i)
-#    titleElement = driver.find_element_by_tag_name('h1').text
-#    t_element.append(titleElement)
-#    driver.implicitly_wait(1)
- #   driver.back
+
+## number of articles collected
+print (len(matches))
 
 
-#print (len(matches))
-sample = {'title': None, 'article': None}
+## scraping title and body of article, storing to a list of dictionaries
+sample = {'title': [], 'article': []}
+result = []
 for j in matches:
     try: 
         driver.get(j)
         titleElement = driver.find_element_by_tag_name('h1').text
         bodyElement = driver.find_element_by_class_name('article__body').get_attribute("textContent")
-        sample.update({'title' : titleElement})
-        sample.update({'article' : bodyElement})
+        #sample.update({'title' : titleElement})
+        #sample.update({'article' : bodyElement})
+        sample = {'title': titleElement, 'article': bodyElement}
+        #sample["title"].update(titleElement)
+        #sample["article"].append(bodyElement)
+        result.append(sample)
         #print(titleElement)
         #print('\n')
         #print(bodyElement)
     except:
         print("Needs a Subscriber Account")
 
+#for pair in sample.items():
+ #   print(pair)
 
-print(sample)
-
-
-
-## trying with Beautifulsoup
-
-#for i in matches:
-#    try:
-#        r = requests.get(i).text
-#        soup = BeautifulSoup(r,'html5lib')
-#
- #       p_tags1 = soup.find_all('p',class_ = "article__body")
-        
-#
-#        for p in p_tags1:
-#            print(p.text.strip())
-
-#        print("\n")
-
-#    except:
-#        print("Subscriber")
+#print(result)
